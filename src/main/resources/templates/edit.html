@@ -1,0 +1,18 @@
+<!-- edit.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Note</title>
+</head>
+<body>
+<h1>Edit Note</h1>
+<form th:action="@{/note/edit}" method="post">
+    <input type="hidden" th:value="${note.id}" name="id">
+    <label for="title">Title:</label><br>
+    <input type="text" id="title" name="title" th:value="${note.title}"><br>
+    <label for="content">Content:</label><br>
+    <textarea id="content" name="content" th:text="${note.content}"></textarea><br>
+    <input type="submit" value="Save">
+</form>
+</body>
+</html>
