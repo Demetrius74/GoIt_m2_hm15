@@ -1,28 +1,38 @@
-<!-- notes.html -->
 <!DOCTYPE html>
 <html>
 <head>
     <title>Notes</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
-<h1>Notes</h1>
-<table>
-    <tr>
-        <th>Title</th>
-        <th>Content</th>
-        <th>Actions</th>
-    </tr>
-    <tr th:each="note : ${notes}">
-        <td th:text="${note.title}"></td>
-        <td th:text="${note.content}"></td>
-        <td>
-            <a th:href="@{/note/edit(id=${note.id})}">Edit</a>
-            <form th:action="@{/note/delete}" method="post">
-                <input type="hidden" th:value="${note.id}" name="id">
-                <input type="submit" value="Delete">
-            </form>
-        </td>
-    </tr>
-</table>
+<div class="container">
+    <h1 class="mt-5 mb-3">Notes</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Content</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="note : ${notes}">
+            <td th:text="${note.title}"></td>
+            <td th:text="${note.content}"></td>
+            <td>
+                <a class="btn btn-primary" th:href="@{/note/edit(id=${note.id})}">Edit</a>
+                <form th:action="@{/note/delete}" method="post" style="display: inline;">
+                    <input type="hidden" th:value="${note.id}" name="id">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<!-- Bootstrap JS and its dependencies -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
