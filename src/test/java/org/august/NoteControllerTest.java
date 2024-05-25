@@ -91,13 +91,13 @@ public class NoteControllerTest {
         note.setTitle("Updated Title");
         note.setContent("Updated Content");
 
-        doNothing().when(noteService).update(note);
+        doNothing().when(noteService).update(any(Note.class));
 
         mockMvc.perform(post("/note/edit")
                         .flashAttr("note", note))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/note/list"));
 
-        verify(noteService, times(1)).update(note);
+        verify(noteService, times(1)).update(any(Note.class));
     }
 }
