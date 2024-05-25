@@ -1,5 +1,6 @@
 package org.august;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -25,7 +26,8 @@ public class NoteControllerTest {
     @InjectMocks
     private NoteController noteController;
 
-    public NoteControllerTest() {
+    @BeforeEach
+    public void setUp() {
         MockitoAnnotations.openMocks(this);
         this.mockMvc = MockMvcBuilders.standaloneSetup(noteController).build();
     }
@@ -54,6 +56,8 @@ public class NoteControllerTest {
 
     @Test
     public void testDelete() throws Exception {
+        doNothing().when(noteService).deleteById(1L);
+
         mockMvc.perform(post("/note/delete")
                         .param("id", "1"))
                 .andExpect(status().is3xxRedirection())
@@ -86,6 +90,8 @@ public class NoteControllerTest {
         note.setId(1L);
         note.setTitle("Updated Title");
         note.setContent("Updated Content");
+
+        doNothing().when(noteService).update(note);
 
         mockMvc.perform(post("/note/edit")
                         .flashAttr("note", note))
